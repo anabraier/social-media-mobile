@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "787860599614",
+    "project_id": "social-media-mobile-e4dfc",
+    "storage_bucket": "social-media-mobile-e4dfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787860599614:android:5efbcabe8c59f641edb26f",
+        "android_client_info": {
+          "package_name": "com.example.socialMediaMobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIehr7KOJj_yOrcJmVCYye_ILIB-F5Wt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
