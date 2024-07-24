@@ -43,7 +43,7 @@ class _PersonalProfState extends State<PersonalProf>{
         ],
       ));
 
-      if(newValue.trim().length > 0) {
+      if (newValue.trim().length > 0) {
         await usersCollection.doc(currentUser.email).update({field: newValue});
       }
   }
@@ -68,10 +68,21 @@ class _PersonalProfState extends State<PersonalProf>{
             return ListView(
               children: [
                 const SizedBox(height: 50,),
-                Icon(Icons.person, size: 72),
+                Icon(
+                  Icons.person, 
+                  size: 72
+                ),
+
                 const SizedBox(height: 10,),
-                Text(currentUser.email!, textAlign: TextAlign.center,),
+  // usr email
+                Text(
+                  currentUser.email!, 
+                  textAlign: TextAlign.center,
+                ),
+
                 const SizedBox(height: 50,),
+
+  //usr deets
                 Padding(
                   padding: const EdgeInsets.only(left: 25),
                   child: Text(
@@ -79,27 +90,33 @@ class _PersonalProfState extends State<PersonalProf>{
                     style: TextStyle(color: Colors.white),
                   ),  
                 ),
+
+  // username
                 Detailbox(
                   text: userData['username'], 
                   sectionName: 'username', 
                   onPressed: () => editField('username'),
                   ),
+
+// bio
                 Detailbox(
                   text: userData['bio'], 
                   sectionName: 'My Bio', 
                   onPressed: () => editField('bio'),
                   ),
                   const SizedBox(height: 30,),
+
+  // usr posts
                   Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: Text(
-                    'My Posts',
-                    style: TextStyle(color: Colors.white),
+                    padding: const EdgeInsets.only(left: 25),
+                    child: Text(
+                      'My Posts',
+                      style: TextStyle(color: Colors.white),
                   ),  
                 ),
               ],
             );
-          }else if(snapshot.hasError){
+          } else if(snapshot.hasError){
             return Center(
               child: Text('Error${snapshot.error}'),
             );

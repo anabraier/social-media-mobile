@@ -79,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         //time: post[]
                         );
                     });
-                }else if(snapshot.hasError){
+                } else if(snapshot.hasError){
                   return Center(
                     child: Text("Error: + ${snapshot.error}"),
                   );
