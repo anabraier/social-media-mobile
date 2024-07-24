@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proj2/post_tile.dart';
+import 'package:social_media_mobile/post_tile.dart';
 import 'profilepage.dart';
 
 class Sidebar extends StatelessWidget {

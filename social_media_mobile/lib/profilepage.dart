@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:proj2/posts.dart';
-import 'auth.dart';
-import 'package:proj2/sidebar.dart';
-import 'package:proj2/personal_prof.dart';
+import 'package:social_media_mobile/posts.dart';
+import 'package:social_media_mobile/auth.dart';
+import 'package:social_media_mobile/sidebar.dart';
+import 'package:social_media_mobile/personal_prof.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Profile Page'),
-        
+        backgroundColor: Colors.white
       ),
       drawer: Sidebar(
         onProfileTap: goToProfile,

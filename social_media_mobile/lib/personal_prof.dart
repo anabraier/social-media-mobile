@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:proj2/detailbox.dart';
+import 'package:social_media_mobile/detailbox.dart';
 
 class PersonalProf extends StatefulWidget {
   const PersonalProf({super.key});
