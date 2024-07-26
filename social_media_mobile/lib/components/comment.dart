@@ -18,15 +18,18 @@ class Comment extends StatelessWidget {
       color: Colors.grey,
       borderRadius: BorderRadius.circular(3),
     ),
+    margin: const EdgeInsets.only(bottom: 5),
+    padding: const EdgeInsets.all(15),
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(text),
-
+        const SizedBox(height: 5),
         Row(
           children: [
-            Text(user),
-            Text(" . "),
-            Text(time),
+            Text(user, style: TextStyle(color: Colors.grey)),
+            Text(" . ", style: TextStyle(color: Colors.grey)),
+            Text(time, style: TextStyle(color: Colors.grey)),
           ],
         )
       ],
