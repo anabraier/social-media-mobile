@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_mobile/components/my_list_tile.dart';
+import 'package:social_media_mobile/home_page.dart';
 
 class MyDrawer extends StatelessWidget {
+  final void Function()? onHomeTap;
   final void Function()? onProfileTap;
   final void Function()? onSignOut;
   const MyDrawer({
     super.key,
+    required this.onHomeTap,
     required this.onProfileTap,
     required this.onSignOut,
   });
@@ -17,41 +20,42 @@ class MyDrawer extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const DrawerHeader(
-            child: Icon(
-              Icons.person,
-              color: Colors.white,
-              size: 64,
-            ),
-          ),
-
-          // home list tile
           Column(
             children: [
+              const DrawerHeader(
+                child: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: 64,
+                ),
+              ),
+
+              // home list tile
               MyListTile(
-                icon: Icons.home, 
+                icon: Icons.home,
                 text: 'H O M E',
-                onTap: () => Navigator.pop(context),
-              ), 
+                onTap: onHomeTap,
+              ),
+
               // profile tile
               MyListTile(
-                icon: Icons.person, 
+                icon: Icons.person,
                 text: 'P R O F I L E',
-                onTap: () => onProfileTap,
+                onTap: onProfileTap,
               ),
             ],
-          ), 
+          ),
           // logout  tile
           Padding(
-            padding: const EdgeInsets.only(bottom: 25.0),
+            padding: const EdgeInsets.only(bottom: 20),
             child: MyListTile(
-              icon: Icons.person, 
+              icon: Icons.logout,
               text: 'L O G O U T',
-              onTap: () => onSignOut,
+              onTap: onSignOut,
             ),
-          ), 
+          ),
         ],
-      )
+      ),
     );
   }
 }
