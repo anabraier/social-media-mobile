@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:social_media_mobile/detailbox.dart';
+import 'package:social_media_mobile/posts.dart'; // Import your Posts widget
 
 class PersonalProf extends StatefulWidget {
   const PersonalProf({super.key});
@@ -137,13 +139,47 @@ class _PersonalProfState extends State<PersonalProf> {
             onPressed: editPhotoURL,
           ),
           const SizedBox(height: 30),
-          // User posts (Placeholder since you are not using Firestore for posts)
+          // User posts
           Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Text(
               'My Posts',
               style: TextStyle(color: Colors.white),
             ),
+          ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('UserPosts')
+                .where('UserEmail', isEqualTo: currentUser.email)
+                .orderBy('TimeStamp', descending: false)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                print("Error: ${snapshot.error}"); // Log the error to console
+                return Center(
+                  child: Text("Error: ${snapshot.error}"),
+                );
+              }
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    final post = snapshot.data!.docs[index];
+                    return Posts(
+                      message: post['Message'],
+                      user: post['UserEmail'],
+                      postId: post.id,
+                      likes: List<String>.from(post['Likes'] ?? []),
+                    );
+                  },
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           ),
         ],
       ),
