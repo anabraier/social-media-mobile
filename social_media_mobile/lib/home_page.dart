@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:social_media_mobile/components/text_field.dart';
 import 'package:social_media_mobile/components/wall_post.dart';
+import 'package:social_media_mobile/components/drawer.dart';
+import 'package:social_media_mobile/personal_prof.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,17 +39,28 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+
+  void goToProfilePage() {
+    Navigator.pop(context);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const PersonalProf(),
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Posts~"),
-        actions: [
-          IconButton(
-            onPressed: signOut,
-            icon: Icon(Icons.logout),
-          ),
-        ],
+        ),
+      drawer: MyDrawer(
+        onProfileTap: goToProfilePage,
+        onSignOut: signOut,
       ),
       body: Center(
         child: Column(

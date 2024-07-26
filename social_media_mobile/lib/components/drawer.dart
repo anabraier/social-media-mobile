@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_mobile/components/my_list_tile.dart';
-import 'package:social_media_mobile/home_page.dart';
 
 class MyDrawer extends StatelessWidget {
-  final void Function()? onHomeTap;
   final void Function()? onProfileTap;
   final void Function()? onSignOut;
   const MyDrawer({
     super.key,
-    required this.onHomeTap,
     required this.onProfileTap,
     required this.onSignOut,
   });
@@ -34,7 +31,7 @@ class MyDrawer extends StatelessWidget {
               MyListTile(
                 icon: Icons.home,
                 text: 'H O M E',
-                onTap: onHomeTap,
+                onTap: () => Navigator.pop(context),
               ),
 
               // profile tile
