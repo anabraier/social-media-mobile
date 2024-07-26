@@ -38,7 +38,7 @@ class _PostsState extends State<Posts> {
     });
 
     DocumentReference postRef = 
-      FirebaseFirestore.instance.collection('User Posts').doc(widget.postId);
+      FirebaseFirestore.instance.collection('UserPosts').doc(widget.postId);
 
     if (isLiked) {
       postRef.update({'Likes':  FieldValue.arrayUnion([currentUser.email])});

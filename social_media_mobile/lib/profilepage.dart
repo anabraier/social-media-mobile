@@ -24,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void postMessage() {
     if (postController.text.isNotEmpty) {
-      FirebaseFirestore.instance.collection("User Posts").add({
+      FirebaseFirestore.instance.collection("UserPosts").add({
         'UserEmail': currentUser.email,
         'Post': postController.text,
         'TimeStamp': Timestamp.now(),
@@ -62,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Expanded(
             child: StreamBuilder(
               stream: FirebaseFirestore.instance
-              .collection('User Posts')
+              .collection('UserPosts')
               .orderBy("TimeStamp", descending: false)
               .snapshots(), 
               builder: (context, snapshot) {

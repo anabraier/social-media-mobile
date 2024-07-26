@@ -46,7 +46,7 @@ class _WallPostState extends State<WallPost> {
        });
     // Access firebase doc
       DocumentReference postRef = 
-        FirebaseFirestore.instance.collection('User Posts').doc(widget.postId);
+        FirebaseFirestore.instance.collection('UserPosts').doc(widget.postId);
 
       if (isLiked) {
         postRef.update({
@@ -61,7 +61,7 @@ class _WallPostState extends State<WallPost> {
 
     void addComment(String commentText) {
       FirebaseFirestore.instance
-      .collection("User Posts")
+      .collection("UserPosts")
       .doc(widget.postId)
       .collection("Comments")
       .add({
@@ -110,7 +110,7 @@ class _WallPostState extends State<WallPost> {
           color: Colors.grey,
           borderRadius: BorderRadius.circular(8),
         ),
-        margin: EdgeInsets.only(top: 25, left: 25, right: 25),
+        margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
         padding: EdgeInsets.all(25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,7 +171,7 @@ class _WallPostState extends State<WallPost> {
               ),
               // comment
               StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance.collection("User Posts").doc(widget.postId).collection("Comments").orderBy("CommentTime", descending: true,).snapshots(),
+                stream: FirebaseFirestore.instance.collection("UserPosts").doc(widget.postId).collection("Comments").orderBy("CommentTime", descending: true,).snapshots(),
                 builder: (context, snapshot) {
                   //show loading circle
                   if (!snapshot.hasData) {
