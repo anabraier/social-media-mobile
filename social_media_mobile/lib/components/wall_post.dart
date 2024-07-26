@@ -151,7 +151,7 @@ class _WallPostState extends State<WallPost> {
                       style: const TextStyle(color: Colors.grey),
                     ),
 
-                  const SizedBox(),
+                  const SizedBox(width: 15),
                     ],
                   ),
                   // comment button
@@ -160,7 +160,7 @@ class _WallPostState extends State<WallPost> {
                       CommentButton(onTap: showCommentDialog),
 
                       const SizedBox(height: 5),
-
+                    
                       Text(
                         '0',
                         style: const TextStyle(color: Colors.grey)
