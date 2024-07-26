@@ -111,7 +111,7 @@ class _WallPostState extends State<WallPost> {
           borderRadius: BorderRadius.circular(8),
         ),
         margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
-        padding: EdgeInsets.all(25),
+        padding: EdgeInsets.only(left: 5.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
             children: [
