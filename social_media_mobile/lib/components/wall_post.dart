@@ -107,33 +107,17 @@ class _WallPostState extends State<WallPost> {
     Widget build(BuildContext context) {
       return Container(
         decoration: BoxDecoration(
-          color: Colors.grey,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(8),
         ),
         margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
-        padding: EdgeInsets.only(left: 5.0),
-        child: Column(
+        padding: EdgeInsets.all(25.0),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(width: 20),
-            // message and user email
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.user,
-                    style: TextStyle(color: Colors.grey[500]),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(widget.message),
-                ],
-              ),
-
-              const SizedBox(width: 20),
-
             // buttons
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // like button
                   Column(
@@ -151,9 +135,24 @@ class _WallPostState extends State<WallPost> {
                       style: const TextStyle(color: Colors.grey),
                     ),
 
-                  const SizedBox(width: 15),
+                  const SizedBox(width: 20),
                     ],
                   ),
+
+                    // message and user email
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.user,
+                        style: TextStyle(color: Colors.grey[500]),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(widget.message),
+                    ],
+                  ),
+
+              const SizedBox(width: 25),
                   // comment button
                   Column(
                     children: [
