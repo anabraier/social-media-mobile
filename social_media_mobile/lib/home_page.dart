@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:social_media_mobile/components/text_field.dart';
 import 'package:social_media_mobile/components/wall_post.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -14,75 +13,75 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final currentUser = FirebaseAuth.instance.currentUser!;
-final textController = TextEditingController();
+  final textController = TextEditingController();
 
-  //sign out
+  // Sign out
   void signOut() {
     FirebaseAuth.instance.signOut();
   }
-//post message
+
+  // Post message
   void postMessage() {
-    if (textController.text.isNotEmpty) {}
-      FirebaseFirestore.instance.collection("User Posts").add({
+    if (textController.text.isNotEmpty) {
+      FirebaseFirestore.instance.collection("UserPosts").add({
         'UserEmail': currentUser.email,
         'Message': textController.text,
-        'TimeStamp': Timestamp.now()
-    });
+        'TimeStamp': Timestamp.now(),
+        'Likes': <String>[] // Initialize as List<String>
+      });
 
-    setState(() {
-      textController.clear();
-    });
+      setState(() {
+        textController.clear();
+      });
+    }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Posts~"),
-      actions: [
-        //sign out butt
-        IconButton(
-          onPressed: signOut, 
-          icon: Icon(Icons.logout)
-        ),
-      ],
+      appBar: AppBar(
+        title: Text("Posts~"),
+        actions: [
+          IconButton(
+            onPressed: signOut,
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
           children: [
-            // the wlal
             Expanded(
-            child: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                .collection("User Posts")
-                .orderBy("TimeStamp", 
-                descending: false)
-                .snapshots(), 
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      final post = snapshot.data!.docs[index];
-                      return WallPost(
-                        message: post['Message'],
-                        user: post['UserEmail'],
-                        postId: post[''],
-                        likes: post['Likes'],
-                      );
-                    },
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text("Error has occurred"),
-                  );
-                }
-                return const Center(child: CircularProgressIndicator());
-              },
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("UserPosts")
+                    .orderBy("TimeStamp", descending: false)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        final post = snapshot.data!.docs[index];
+                        List<String> likes =
+                            List<String>.from(post['Likes'] ?? []);
+                        return WallPost(
+                          message: post['Message'],
+                          user: post['UserEmail'],
+                          postId: post.id,
+                          likes: likes,
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Error has occurred"),
+                    );
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
               ),
             ),
-            // the posts
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
@@ -92,17 +91,19 @@ final textController = TextEditingController();
                       controller: textController,
                       hintText: "Write something for the wall!",
                       obscureText: false,
-                    )
+                    ),
                   ),
-                  IconButton(onPressed: postMessage, icon: const Icon(Icons.arrow_circle_down))
+                  IconButton(
+                    onPressed: postMessage,
+                    icon: const Icon(Icons.arrow_circle_down),
+                  ),
                 ],
               ),
             ),
-            // text logged in as
-            Text("Logged in as: " + currentUser.email!)
+            Text("Logged in as: " + currentUser.email!),
           ],
-        )
-      )
+        ),
+      ),
     );
   }
 }
