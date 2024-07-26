@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:social_media_mobile/components/button.dart';
 import 'package:social_media_mobile/components/text_field.dart';
-import 'signup_screen.dart';
-import 'main.dart'; // Import AuthScreen for navigation
+
 
 class LoginScreen extends StatefulWidget {
   final Function()? onTap;
@@ -69,8 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 10),
                 //password
                 MyTextField(
-                  controller: _emailController,
-                  hintText: 'Email',
+                  controller: _passwordController,
+                  hintText: 'Password',
                   obscureText: true,
                 ),
                 const SizedBox(height: 10),
