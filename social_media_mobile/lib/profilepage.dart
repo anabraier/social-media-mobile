@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:social_media_mobile/posts.dart';
-import 'package:social_media_mobile/auth.dart';
+
 import 'package:social_media_mobile/sidebar.dart';
 import 'package:social_media_mobile/personal_prof.dart';
 

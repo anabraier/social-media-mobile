@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_mobile/post_tile.dart';
-import 'profilepage.dart';
+
 
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key, required this.onProfileTap, required this.onSignOut});

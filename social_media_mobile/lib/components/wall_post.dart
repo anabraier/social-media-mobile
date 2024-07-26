@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:social_media_mobile/components/comment_button.dart';
 import 'package:social_media_mobile/components/like_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:social_media_mobile/helper/help_methods.dart';
+import 'package:social_media_mobile/components/comment.dart';
+
+
 
 
 class WallPost extends StatefulWidget {
@@ -103,7 +107,7 @@ class _WallPostState extends State<WallPost> {
     Widget build(BuildContext context) {
       return Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey,
           borderRadius: BorderRadius.circular(8),
         ),
         margin: EdgeInsets.only(top: 25, left: 25, right: 25),
@@ -165,6 +169,33 @@ class _WallPostState extends State<WallPost> {
                   ),
                 ],
               ),
+              // comment
+              StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance.collection("User Posts").doc(widget.postId).collection("Comments").orderBy("CommentTime", descending: true,).snapshots(),
+                builder: (context, snapshot) {
+                  //show loading circle
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: 
+                      snapshot.data!.docs.map((doc) {
+                        //retrieve comment from firebase
+                        final commentData = doc.data() as Map<String, dynamic>;
+                        return Comment(
+                          text: commentData["CommentText"], 
+                          user: commentData["CommentedBy"], 
+                          time: formatData(commentData["CommentTime"]),
+                        );
+                      }).toList(),
+                  );
+                },
+                
+              )
             ],
         ),
       );
